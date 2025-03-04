@@ -1,6 +1,7 @@
 from turtle import Screen, Turtle
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 screen = Screen()
@@ -9,10 +10,13 @@ screen.bgcolor("black")
 screen.title("Pong Game")
 screen.tracer(0)
 
+scoreboard = Scoreboard()
+
 r_paddle = Paddle((350, 0))
 l_paddle = Paddle((-350, 0))
 
 ball = Ball()
+
 
 screen.listen()
 screen.onkey(r_paddle.go_up, "Up")
@@ -34,9 +38,11 @@ while game_is_on:
         ball.bounce_x()
 
     if ball.xcor() < -380:
+        scoreboard.r_point()
         ball.reset_ball()
 
     if ball.xcor() > 380:
+        scoreboard.l_point()
         ball.reset_ball()
 
 
